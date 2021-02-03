@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: API for page load time calculation
+Resources:
+  LoadTimeapi:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: main.load_handler
+      Runtime: python3.7
+      CodeUri: .
+      Description: API for page load time calculation
+      MemorySize: 512
+      Timeout: 10
+      Role: 'arn:aws:iam::938668680897:role/service-role/api_gateway_access'
+      Events:
+        Api1:
+          Type: Api
+          Properties:
+            Path: /LoadTime-api
+            Method: POST
+        Api2:
+          Type: Api
+          Properties:
+            Path: /LoadTime-api
+            Method: POST
+      Tags:
+        'lambda-console:blueprint': microservice-http-endpoint
